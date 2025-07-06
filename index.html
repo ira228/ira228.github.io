@@ -1,47 +1,325 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Landing Page</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Charity: Water - Make Every Drop Count</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #fff7e1;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      background-color: #fff7e1;
+    }
+
+    .left-column {
+      width: 45%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      height: 100%;
+      margin: 0;
+      padding: 0 10px 0 10px;
+      background-color: #fff7e1;
+    }
+
+    .middle-column {
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      height: 100%;
+      margin: 0;
+      padding: 0 1px;
+      background-color: #fff7e1;
+    }
+
+    .right-column {
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-color: #fff7e1;
+    }
+
+    .section-1,
+    .section-2,
+    .section-3 {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px 20px;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .section-1 {
+      background-color: #77a8bb;
+      color: #fff7e1;
+      border-top: 40px solid #fff7e1;
+      font-size: 28px;
+      text-align: center;
+    }
+
+    .section-2 {
+      background-color: #fff7e1;
+      border-top: 17px solid #FFC907;
+      border-bottom: 17px solid #FFC907;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 60px;
+      text-align: center;
+    }
+
+    .section-2 .main-text {
+      font-size: 32px;
+    }
+
+    .section-2 .sub-text {
+      font-size: 20px;
+      margin-top: 25px;
+      max-width: 80%;
+      line-height: 1.4;
+    }
+
+    .section-3 {
+      background-color: #77a8bb;
+      color: #fff7e1;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .section-3 .white-strip {
+      background-color: #fff7e1;
+      border-radius: 4px;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 10px 15px;
+      box-sizing: border-box;
+      gap: 10px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .donate-dropdown,
+    .blue-block {
+      font-size: 16px;
+      width: 150px;
+      padding: 8px 12px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .donate-dropdown {
+      border: 1px solid #ccc;
+      appearance: none;
+      background: #fff7e1 url("data:image/svg+xml,%3Csvg fill='none' stroke='%23333' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 12px center;
+      background-size: 12px 12px;
+      text-align: left;
+      justify-content: flex-start;
+    }
+
+    .blue-block {
+      background-color: #284b70;
+      color: #fff7e1;
+      font-weight: bold;
+      text-transform: none;
+      font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .custom-amount {
+      display: none;
+      width: 150px;
+      padding: 8px 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: #fff7e1;
+    }
+
+    .middle-column img {
+      flex: 1;
+      width: 100%;
+      height: 80%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      margin-top: 40px;
+    }
+
+    .middle-column .caption {
+      height: 20%;
+      font-size: 18px;
+      text-align: center;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .right-column .top-part,
+    .right-column .bottom-part {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+      padding: 20px;
+      box-sizing: border-box;
+      flex-direction: column;
+      gap: 10px;
+      color: #333;
+    }
+
+    .right-column .top-part {
+      background-color: #fff7e1;
+      font-size: 24px;
+      font-weight: bold;
+      align-items: center;
+      justify-content: flex-start;
+      padding-top: 40px;
+    }
+
+    .right-column .bottom-part {
+      background-color: #fff7e1;
+      font-size: 15px;
+    }
+
+    .right-column .bottom-part p {
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    #piechart {
+      width: 100%;
+      height: 100%;
+      max-height: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-column,
+      .middle-column,
+      .right-column {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  </style>
+
+  <script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['Expenses', 'amount'],
+        ['Water projects', 59106502],
+        ['Sustainability', 5100609],
+        ['Salaries', 2503602]
+      ]);
+
+      var options = {
+        title: 'Expenses',
+        pieHole: 0,
+        legend: { position: 'bottom' },
+        colors: ['#003366', '#77a8bb', '#ffc907'] // Custom brand colors
+      };
+
+      var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+      chart.draw(data, options);
+    }
+
+    window.addEventListener('resize', drawChart);
+
+    function handleDonationChange(select) {
+      const customBox = document.getElementById('customAmountBox');
+      if (select.value === 'custom') {
+        customBox.style.display = 'block';
+      } else {
+        customBox.style.display = 'none';
+      }
+    }
+  </script>
 </head>
 <body>
-    <!-- Hero Section: This is the main banner at the top of the page -->
-    <section class="hero">
-        <!-- Main headline -->
-        <h1>Clean Water for Everyone</h1>
-        <!-- Subheadline -->
-        <p>Join us in bringing safe, clean water to communities in need.</p>
-    </section>
-
-    <!-- Story Section: This tells the story of the nonprofit -->
-    <section class="story">
-        <h2>Our Story</h2>
-        <p>
-         
-    </section>
-
-    <!-- Real-World Impact Story Section -->
-    <section class="impact-story">
-        <!-- Section headline -->
-        <h2>Real Impact: Meet Amina</h2>
-        <!-- Container for image and text -->
-        <div class="impact-content">
-            <!-- Impact image -->
-            <img src="https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=600&q=80" alt="Amina smiling with clean water" class="impact-image">
-            <!-- Impact story text -->
-            <p>
-                Amina used to walk miles every day to collect water for her family. Thanks to your support, her village now has a clean water well. Amina can go to school and her family is healthier and happier.
-            </p>
+  <div class="container">
+    <div class="left-column">
+      <!-- Logo at the top left corner -->
+      <div style="padding: 30px 0 10px 10px;">
+        <!-- Replace the src below with your own logo file if needed -->
+        <img src="https://www.charitywater.org/vite/assets/cw-logo-dark-BcPk1WVG.svg" alt="charity: water logo" style="height:40px;">
+      </div>
+      <div class="section-1">
+        Empower Your Future: Lead with Data-Driven Impact
+      </div>
+      <div class="section-2">
+        <div class="main-text">Join Charity: Water</div>
+        <div class="sub-text">
+          Visualize how your support and leadership brings sustainable clean water to communities, with every donated dollar tracked and every outcome measured
         </div>
-    </section>
-
-    <!-- Call-to-Action Section: This encourages visitors to take action -->
-    <section class="call-to-action">
-        <h2>Make a Difference</h2>
-        <p>Your support can help save lives. Every donation brings us closer to a world with clean water for all.</p>
-        <a href="#" class="donate-button">Donate Now</a>
-    </section>
+      </div>
+      <div class="section-3">
+        <div class="white-strip">
+          <div class="row">
+            <select class="donate-dropdown" aria-label="Donate Now" onchange="handleDonationChange(this)">
+              <option>Donate Now</option>
+              <option value="5">$5</option>
+              <option value="25">$25</option>
+              <option value="100">$100</option>
+              <option value="custom">Custom</option>
+            </select>
+            <div class="blue-block">Change A Life Today</div>
+          </div>
+          <input id="customAmountBox" class="custom-amount" type="text" placeholder="Enter amount" />
+        </div>
+      </div>
+    </div>
+    <div class="middle-column">
+      <img src="https://cdn2.dropmarkusercontent.com/52043/755996ebe05ddbe0687c8bc4565acebd2e67ea36/preview/Rwanda-2018-march-cw-cubbygraham-1088.jpg" alt="Charity Water Image" />
+      <div class="caption">
+        Empower communities and drive clean water solutions — because measurable impact starts with your leadership.
+      </div>
+    </div>
+    <div class="right-column">
+      <div class="top-part">
+        <div id="piechart"></div>
+      </div>
+      <div class="bottom-part">
+        <p><strong style="text-decoration: underline;">You Give:</strong> 100% of your donation goes directly to fund clean water projects.</p>
+        <p><strong style="text-decoration: underline;">We Track:</strong> Every dollar you give is transparently mapped in each area and monitored for impact, providing a better future.</p>
+        <p><strong style="text-decoration: underline;">Lives Change:</strong> Your gift brings sustainable clean water to communities, transforming lives forever.</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
